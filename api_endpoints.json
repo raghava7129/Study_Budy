@@ -1,0 +1,294 @@
+[
+    {
+        "method": "POST",
+        "url": "/api/users",
+        "request": {
+            "Body": {
+                "username": "username",
+                "email": "email",
+                "password": "password"
+            }
+        },
+        "response": {
+            "if_user_exists": {
+                "status": 400
+            },
+            "if_successful": {
+                "status": 201
+            }
+        }
+    },
+    {
+        "method": "GET",
+        "url": "/api/users/:username",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            }
+        },
+        "response": {
+            "if_not_found": {
+                "status": 404
+            },
+            "if_successful": {
+                "status": 200,
+                "Body": {
+                    "user_id": "user_id",
+                    "username": "username",
+                    "email": "email",
+                    "created_at": "created_at"
+                }
+            }
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/api/events",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            },
+            "Body": {
+                "event_name": "event_name",
+                "description": "description",
+                "start_time": "start_time",
+                "end_time": "end_time",
+                "theme": "theme",
+                "challenge": "challenge",
+                "goal": "goal",
+                "recurrence": "recurrence"
+            }
+        },
+        "response": {
+            "if_event_exists": {
+                "status": 400
+            },
+            "if_successful": {
+                "status": 201
+            }
+        }
+    },
+    {
+        "method": "GET",
+        "url": "/api/events/:event_id",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            }
+        },
+        "response": {
+            "if_not_found": {
+                "status": 404
+            },
+            "if_successful": {
+                "status": 200,
+                "Body": {
+                    "event_id": "event_id",
+                    "event_name": "event_name",
+                    "description": "description",
+                    "start_time": "start_time",
+                    "end_time": "end_time",
+                    "theme": "theme",
+                    "challenge": "challenge",
+                    "goal": "goal",
+                    "created_at": "created_at"
+                }
+            }
+        }
+    },
+    {
+        "method": "GET",
+        "url": "/api/events?recurrence=recurrence",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            }
+        },
+        "response": {
+            "if_unauthorized": {
+                "status": 401
+            },
+            "if_no_events_found": {
+                "status": 404
+            },
+            "if_successful": {
+                "status": 200,
+                "Body": [
+                    {
+                        "event_id": "event_id",
+                        "event_name": "event_name",
+                        "description": "description",
+                        "start_time": "start_time",
+                        "end_time": "end_time",
+                        "theme": "theme",
+                        "challenge": "challenge",
+                        "goal": "goal",
+                        "recurrence": "recurrence",
+                        "created_at": "created_at"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/api/questions",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            },
+            "Body": {
+                "question_text": "question_text",
+                "question_type": "question_type",
+                "complexity_level": "complexity_level"
+            }
+        },
+        "response": {
+            "if_successful": {
+                "status": 201
+            }
+        }
+    },
+    {
+        "method": "GET",
+        "url": "/api/questions/:question_id",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            }
+        },
+        "response": {
+            "if_not_found": {
+                "status": 404
+            },
+            "if_successful": {
+                "status": 200,
+                "Body": {
+                    "question_id": "question_id",
+                    "question_text": "question_text",
+                    "question_type": "question_type",
+                    "complexity_level": "complexity_level",
+                    "created_at": "created_at"
+                }
+            }
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/api/event_questions",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            },
+            "Body": {
+                "event_id": "event_id",
+                "question_id": "question_id"
+            }
+        },
+        "response": {
+            "if_successful": {
+                "status": 201
+            }
+        }
+    },
+    {
+        "method": "GET",
+        "url": "/api/participants?event_id=event_id",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            }
+        },
+        "response": {
+            "if_successful": {
+                "status": 200,
+                "Body": [
+                    {
+                        "participant_id": "participant_id",
+                        "user_id": "user_id",
+                        "event_id": "event_id",
+                        "joined_at": "joined_at"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/api/performances",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            },
+            "Body": {
+                "participant_id": "participant_id",
+                "question_id": "question_id",
+                "response": "response",
+                "score": "score",
+                "response_time": "response_time"
+            }
+        },
+        "response": {
+            "if_successful": {
+                "status": 201
+            }
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/api/badges",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            },
+            "Body": {
+                "badge_name": "badge_name",
+                "description": "description",
+                "criteria": "criteria",
+                "badge_type": "badge_type"
+            }
+        },
+        "response": {
+            "if_successful": {
+                "status": 201
+            }
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/api/user_badges",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            },
+            "Body": {
+                "user_id": "user_id",
+                "badge_id": "badge_id"
+            }
+        },
+        "response": {
+            "if_successful": {
+                "status": 201
+            }
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/api/event_schedules",
+        "request": {
+            "Headers": {
+                "Authorization": "Bearer [token]"
+            },
+            "Body": {
+                "event_id": "event_id",
+                "recurrence": "recurrence"
+            }
+        },
+        "response": {
+            "if_successful": {
+                "status": 201
+            }
+        }
+    }
+
+]
