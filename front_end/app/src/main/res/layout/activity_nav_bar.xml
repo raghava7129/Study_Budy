@@ -1,0 +1,56 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Components.NavBar">
+
+   <androidx.drawerlayout.widget.DrawerLayout
+       android:id="@+id/drawer_layout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+         <View
+             android:id="@+id/statusBar"
+             android:layout_width="match_parent"
+             android:layout_height="70dp"
+             android:background="#E8D18C"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <ImageView
+             android:id="@+id/menuIcon"
+             android:layout_width="50dp"
+             android:layout_height="50dp"
+             android:src="@drawable/menu_icon"
+             android:contentDescription="Menu Icon"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="10dp"
+             android:onClick="openDrawer" />
+
+      </RelativeLayout>
+
+      <com.google.android.material.navigation.NavigationView
+          android:id="@+id/nav_view"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_gravity="start"
+          android:background="#E8D18C"
+          app:menu="@menu/drawer_menu" />
+   </androidx.drawerlayout.widget.DrawerLayout>
+
+
+   <LinearLayout
+       android:id="@+id/dynamic_content"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="horizontal"
+       android:layout_below="@id/statusBar"
+       tools:ignore="NotSibling" />
+
+</RelativeLayout>
