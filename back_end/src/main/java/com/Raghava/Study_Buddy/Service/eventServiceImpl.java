@@ -59,4 +59,9 @@ public class eventServiceImpl implements eventService{
         eventDAO.deleteEvent(event_name);
         return "success";
     }
+
+    @Override
+    public List<events> getEventsByRecurrence(String recurrence) {
+        return eventDAO.getEventsByRecurrence(recurrence);
+    }
 }

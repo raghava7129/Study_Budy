@@ -81,6 +81,24 @@ public class eventsController {
 
     }
 
+    @GetMapping()
+    public ResponseEntity<List<events>> getEventsByRecurrence(@RequestHeader("Authorization") String token, @RequestParam String recurrence) {
+        if(!jwtUtils.validateJwtToken(token.split(" ")[1])){
+            return ResponseEntity.status(401).body(null);
+        }
+
+        loginUserRequest loginUserRequestObj = jwtUtils.decodeJwtToken(token.split(" ")[1]);
+
+        if(loginUserRequestObj == null) return ResponseEntity.status(401).body(null);
+
+        List<events> eventResponseObj =  eventService.getEventsByRecurrence(recurrence);
+
+        if(eventResponseObj == null || eventResponseObj.isEmpty()) return ResponseEntity.status(204).body(null);
+        else return ResponseEntity.status(200).body(eventResponseObj);
+
+
+    }
+
     @PutMapping("/{event_name}")
     public ResponseEntity<Void> updateEvent(@RequestHeader("Authorization") String token, @PathVariable String event_name, @RequestBody events event) {
         if(!jwtUtils.validateJwtToken(token.split(" ")[1])){

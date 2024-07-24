@@ -192,4 +192,42 @@ public class eventDAOImpl implements eventDAO{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<events> getEventsByRecurrence(String recurrence) {
+        try{
+
+            Connection connection = DriverManager.getConnection(url,user,password);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM EventSchedules WHERE recurrence = ?");
+            preparedStatement.setString(1,recurrence);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<events> eventList = new ArrayList<>();
+
+            while(resultSet.next()){
+                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM events WHERE event_name = ?");
+                preparedStatement1.setString(1,resultSet.getString("event_name"));
+                ResultSet resultSet1 = preparedStatement1.executeQuery();
+
+                if(!resultSet1.next()) continue;
+
+                events event = new events();
+                event.setEvent_name(resultSet1.getString("event_name"));
+                event.setDescription(resultSet1.getString("description"));
+                event.setStart_time(resultSet1.getString("start_time"));
+                event.setEnd_time(resultSet1.getString("end_time"));
+                event.setTheme(resultSet1.getString("theme"));
+                event.setChallenge(resultSet1.getString("challenge"));
+                event.setGoal(resultSet1.getString("goal"));
+                event.setRecurrence(resultSet.getString("recurrence"));
+
+                eventList.add(event);
+            }
+
+            return eventList;
+
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 }

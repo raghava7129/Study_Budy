@@ -11,4 +11,6 @@ public interface eventDAO {
     public void deleteEvent(String event_name);
 
     public List<events> getAllEvents();
+
+    public List<events> getEventsByRecurrence(String recurrence);
 }

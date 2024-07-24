@@ -15,4 +15,6 @@ public interface eventService {
     public String updateEvent(String event_name, String description, String start_time, String end_time, String theme, String challenge, String goal);
 
     public String deleteEvent(String event_name);
+
+    public List<events> getEventsByRecurrence(String recurrence);
 }
