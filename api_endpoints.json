@@ -70,7 +70,7 @@
     },
     {
         "method": "GET",
-        "url": "/api/events/:event_id",
+        "url": "/api/events/:event_name",
         "request": {
             "Headers": {
                 "Authorization": "Bearer [token]"
